@@ -4,7 +4,7 @@
 
 Built with Typescript and TailwindCSS
 
-### 🏠 [Homepage](www.gettimely.now.sh)
+### 🏠 [Homepage](www.timely.now.sh)
 
 ## Install
 
