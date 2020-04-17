@@ -1,0 +1,40 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Jogging",
+      "dateStart": "2020-04-15T14:20:58.704Z",
+      "dateEnd": "2020-04-15T14:20:58.704Z"
+    },
+    {
+      "dateStart": "2020-04-16T19:26:24.468Z",
+      "dateEnd": "2020-04-16T19:26:28.007Z",
+      "title": "No name for now",
+      "id": 2
+    },
+    {
+      "dateStart": "2020-04-16T20:05:00.508Z",
+      "dateEnd": "2020-04-16T20:05:04.991Z",
+      "title": "Sike",
+      "id": 3
+    },
+    {
+      "dateStart": "2020-04-17T01:59:59.009Z",
+      "dateEnd": "2020-04-17T02:00:09.558Z",
+      "title": "No name for now",
+      "id": 4
+    },
+    {
+      "dateStart": "2020-04-17T18:29:36.815Z",
+      "dateEnd": "2020-04-17T18:29:39.037Z",
+      "title": "Untitled Event",
+      "id": 7
+    },
+    {
+      "dateStart": "2020-04-17T18:53:51.082Z",
+      "dateEnd": "2020-04-17T18:54:40.395Z",
+      "title": "Untitled Event",
+      "id": 8
+    }
+  ]
+}
