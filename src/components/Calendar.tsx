@@ -89,7 +89,9 @@ const Calendar: React.FC<Props> = ({ events, loadUserEvents }) => {
       })}
     </div>
   ) : (
-    <div>Loading...</div>
+    <div className="text-gray-300 text-xl font-digital">
+      Record your first event :)
+    </div>
   );
 };
 

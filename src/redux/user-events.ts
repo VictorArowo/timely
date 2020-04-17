@@ -3,9 +3,10 @@ import { ThunkAction } from "redux-thunk";
 import axios from "axios";
 import { RootState } from "./store";
 import { selectDateStart } from "./recorder";
+import generateId from "../utils/generateId";
 
 export interface UserEvent {
-  id: number;
+  id: string;
   title: string;
   dateStart: string;
   dateEnd: string;
@@ -54,8 +55,7 @@ export const loadUserEvents = (): ThunkAction<
   });
 
   try {
-    const response = await axios.get("http://localhost:3002/events");
-    const events: UserEvent[] = response.data;
+    const events: UserEvent[] = JSON.parse(localStorage.getItem("events")!);
     dispatch({
       type: LOAD_SUCCESS,
       payload: {
@@ -96,18 +96,21 @@ export const createUserEvent = (): ThunkAction<
 
   try {
     const dateStart = selectDateStart(getState());
-    const event: Omit<UserEvent, "id"> = {
+    const event: UserEvent = {
       dateStart,
       dateEnd: new Date().toISOString(),
       title: "Untitled Event",
+      id: generateId(),
     };
 
-    const response = await axios.post("http://localhost:3002/events", event);
-    const created: UserEvent = response.data;
+    const events = JSON.parse(localStorage.getItem("events")!);
+    events.push(event);
+    localStorage.setItem("events", JSON.stringify(events));
+
     dispatch({
       type: CREATE_SUCCESS,
       payload: {
-        event: created,
+        event,
       },
     });
   } catch (error) {
@@ -145,7 +148,9 @@ export const deleteUserEvent = (
   });
 
   try {
-    await axios.delete(`http://localhost:3002/events/${id}`);
+    const events: UserEvent[] = JSON.parse(localStorage.getItem("events")!);
+    const filteredEvents = events.filter((event) => event.id !== id);
+    localStorage.setItem("events", JSON.stringify(filteredEvents));
 
     dispatch({
       type: DELETE_SUCCESS,
@@ -188,16 +193,16 @@ export const updateUserEvent = (
   });
 
   try {
-    const response = await axios.put(
-      `http://localhost:3002/events/${event.id}`,
-      event
+    const events: UserEvent[] = JSON.parse(localStorage.getItem("events")!);
+    const updatedEvents = events.map((oldEvent) =>
+      oldEvent.id === event.id ? event : oldEvent
     );
-    const updatedEvent: UserEvent = response.data;
+    localStorage.setItem("events", JSON.stringify(updatedEvents));
 
     dispatch({
       type: UPDATE_SUCCESS,
       payload: {
-        event: updatedEvent,
+        event,
       },
     });
   } catch (error) {
